@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/main"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".MainActivity">
+
+    <TextView
+        android:id="@+id/tvClickOrSelectImg"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="30dp"
+        android:text="Click Or Select Image"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <ImageView
+        android:id="@+id/ivAttachImage"
+        android:layout_width="40dp"
+        android:layout_height="40dp"
+        android:layout_marginStart="10dp"
+        android:src="@drawable/attach"
+        app:layout_constraintBottom_toBottomOf="@+id/tvClickOrSelectImg"
+        app:layout_constraintStart_toEndOf="@+id/tvClickOrSelectImg"
+        app:layout_constraintTop_toTopOf="@+id/tvClickOrSelectImg" />
+
+    <ImageView
+        android:id="@+id/ivCamera"
+        android:layout_width="40dp"
+        android:layout_height="40dp"
+        android:layout_marginStart="10dp"
+        android:src="@drawable/camera"
+        app:layout_constraintBottom_toBottomOf="@+id/tvClickOrSelectImg"
+        app:layout_constraintStart_toEndOf="@+id/ivAttachImage"
+        app:layout_constraintTop_toTopOf="@+id/tvClickOrSelectImg" />
+
+    <ImageView
+        android:id="@+id/ivImage"
+        android:layout_width="300dp"
+        android:layout_height="300dp"
+        tools:src="@drawable/camera"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/ivAttachImage" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>

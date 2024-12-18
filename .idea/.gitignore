@@ -1,0 +1,9 @@
+# Default ignored files
+/shelf/
+/workspace.xml
+/misc.xml
+other.xml
+kotlinc.xml
+gradle.xml
+deploymentTargetSelector.xml
+compiler.xml
