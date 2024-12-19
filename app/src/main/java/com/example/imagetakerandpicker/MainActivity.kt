@@ -26,6 +26,7 @@ import java.util.Date
 import java.util.Locale
 
 class MainActivity : AppCompatActivity() {
+    private val CAMERA_PERMISSION_REQUEST_CODE = 100
     private val CAMERA_CAPTURE_REQUEST_CODE = 101
     private val GALLERY_PICK_REQUEST_CODE = 103
 
@@ -48,7 +49,7 @@ class MainActivity : AppCompatActivity() {
             openGallery()
         }
         camera.setOnClickListener {
-            openCamera()
+            requestCameraPermission()
         }
     }
 
@@ -103,6 +104,32 @@ class MainActivity : AppCompatActivity() {
         Glide.with(this).load(currentPhotoPath).into(image)
     }
 
+    private fun requestCameraPermission() {
+        if (ContextCompat.checkSelfPermission(this, Manifest.permission.CAMERA) != PackageManager.PERMISSION_GRANTED) {
+            ActivityCompat.requestPermissions(
+                this,
+                arrayOf(Manifest.permission.CAMERA),
+                CAMERA_PERMISSION_REQUEST_CODE
+            )
+        } else {
+            openCamera()
+        }
+    }
+
+    override fun onRequestPermissionsResult(requestCode: Int, permissions: Array<out String>, grantResults: IntArray) {
+        super.onRequestPermissionsResult(requestCode, permissions, grantResults)
+        when (requestCode) {
+            CAMERA_PERMISSION_REQUEST_CODE -> {
+                if (grantResults.isNotEmpty() && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
+                    openCamera() // Permission granted, open camera
+                } else {
+                    Toast.makeText(this, "Camera permission denied", Toast.LENGTH_SHORT).show()
+                }
+            }
+        }
+    }
+
+
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         super.onActivityResult(requestCode, resultCode, data)
         if (resultCode == Activity.RESULT_OK) {
@@ -113,9 +140,6 @@ class MainActivity : AppCompatActivity() {
                 GALLERY_PICK_REQUEST_CODE -> {
                     data?.data?.let { uri ->
                         savePhotoToDatabase(uri.toString())
-                        getRealPathFromUri(uri)?.also { path ->
-                            savePhotoToDatabase(path)
-                        }
                     }
                 }
             }

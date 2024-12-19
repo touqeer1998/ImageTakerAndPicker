@@ -7,3 +7,4 @@ kotlinc.xml
 gradle.xml
 deploymentTargetSelector.xml
 compiler.xml
+appInsightsSettings.xml
